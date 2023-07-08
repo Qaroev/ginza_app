@@ -6,10 +6,10 @@ import 'package:untitled/basket.dart';
 import 'package:untitled/regions.dart';
 
 import 'about_us.dart';
-import 'appservice.dart';
 import 'data.dart';
 
 var orders = [];
+String nameRegion = 'ПО КАРЫМСКОЙ 100 р';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -20,7 +20,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final GlobalKey<SliderDrawerState> _key = GlobalKey<SliderDrawerState>();
-  String nameRegion = 'ДОСТАВКА ПО КАРЫМСКОЙ';
 
   var menuItems;
   dynamic res = 0;
@@ -145,15 +144,15 @@ class _MyHomePageState extends State<MyHomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: Text('$nameRegion',
+                                    child: Text('ДОСТАВКА $nameRegion',
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
                                             color: Colors.white)),
                                   ),
-                                  Container(
+                                  const SizedBox(
                                     width: 10,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.arrow_forward_ios_rounded,
                                       color: Colors.white,
                                     ),
@@ -1785,11 +1784,9 @@ class _SliderView extends StatelessWidget {
             width: 100,
           ),
           ...[
+            Menu(Icons.info_outline, 'О нас'),
             Menu(Icons.menu, 'Меню'),
             Menu(Icons.shopping_basket_outlined, 'Корзина'),
-            // Menu(Icons.reviews_outlined, 'Отзывы'),
-            Menu(Icons.info_outline, 'О нас'),
-            Menu(Icons.phone_android_outlined, 'О приложении'),
             Menu(Icons.phone,
                 '89143591106\nтел для заявок пгт.Карымское ул. Верняя 3в'),
           ]

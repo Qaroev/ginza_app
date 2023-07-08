@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:untitled/home.dart';
 
 import 'info.dart';
 
@@ -63,7 +64,7 @@ class _BasketPageState extends State<BasketPage> {
                                   Row(
                                     children: [
                                       Image.asset(
-                                        'assets/images/salat/Греческий.jpg',
+                                        e['image'],
                                         fit: BoxFit.fill,
                                         width: 100,
                                         height: 100,
@@ -73,8 +74,8 @@ class _BasketPageState extends State<BasketPage> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text(
-                                            'Сет Рио',
+                                          Text(
+                                            e['name'],
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 18,
@@ -190,7 +191,7 @@ class _BasketPageState extends State<BasketPage> {
                                 ),
                               ),
                               Text(
-                                'Бесплатно',
+                                'Бесплатно ${calcDos()}',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -230,7 +231,7 @@ class _BasketPageState extends State<BasketPage> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) =>  const InfoPage()),
+                            builder: (context) => const InfoPage()),
                       );
                     },
                     child: Padding(
@@ -261,6 +262,39 @@ class _BasketPageState extends State<BasketPage> {
     );
   }
 
+  calcDos() {
+    var regions = [
+      {
+        "name": "ПО КАРЫМСКОЙ 100 р",
+        "startTime": "11:00",
+        "endTime": "22:30",
+      },
+      {
+        "name": "ДО КАРЬЕРА 200р",
+        "startTime": "11:00",
+        "endTime": "22:30",
+      },
+      {
+        "name": "ДО ИНГОДЫ 250р",
+        "startTime": "11:00",
+        "endTime": "22:30",
+      },
+      {
+        "name": "ДО КАДАХТЫ 250р",
+        "startTime": "11:00",
+        "endTime": "22:30",
+      }
+    ];
+    var price = [100, 200, 250, 250];
+    var index = 0;
+    for (var element in regions) {
+      if (element['name'] == nameRegion) {
+        index = regions.indexOf(element);
+      }
+    }
+    return price[index];
+  }
+
   clc(e) {
     return e['count'] * e['price'];
   }
@@ -271,6 +305,6 @@ class _BasketPageState extends State<BasketPage> {
       var r = element['price'] * element['count'];
       res += r;
     }
-    return res;
+    return res + calcDos();
   }
 }
