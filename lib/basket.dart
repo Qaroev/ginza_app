@@ -191,7 +191,7 @@ class _BasketPageState extends State<BasketPage> {
                                 ),
                               ),
                               Text(
-                                'Бесплатно ${calcDos()}',
+                                '${calcDos()} р.',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -213,7 +213,7 @@ class _BasketPageState extends State<BasketPage> {
                                 ),
                               ),
                               Text(
-                                '${calc()} р.',
+                                '${calc() + calcDos()} р.',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
@@ -305,6 +305,6 @@ class _BasketPageState extends State<BasketPage> {
       var r = element['price'] * element['count'];
       res += r;
     }
-    return res + calcDos();
+    return res;
   }
 }
