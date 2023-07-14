@@ -7,9 +7,10 @@ import 'package:untitled/regions.dart';
 
 import 'about_us.dart';
 import 'data.dart';
+import 'discount.dart';
 
 var orders = [];
-String nameRegion = 'ПО КАРЫМСКОЙ 100 р';
+String nameRegion = 'по Карымской 100 р';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -81,6 +82,22 @@ class _MyHomePageState extends State<MyHomePage> {
                             builder: (context) => const AboutUs()),
                       );
                     }
+                    if (title == 'Скидки') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => DiscountPage(
+                                  title: 'Скидки',
+                                )),
+                      );
+                    }
+                    if (title == 'Акции') {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                            builder: (context) => DiscountPage(
+                                  title: 'Акции',
+                                )),
+                      );
+                    }
                   });
                 },
               ),
@@ -144,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Expanded(
-                                    child: Text('ДОСТАВКА $nameRegion',
+                                    child: Text('Доставка $nameRegion',
                                         style: const TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w500,
@@ -1784,11 +1801,14 @@ class _SliderView extends StatelessWidget {
             width: 100,
           ),
           ...[
-            Menu(Icons.info_outline, 'О нас'),
+            Menu(Icons.shopify_outlined, 'Акции'),
+            Menu(Icons.discount_outlined, 'Скидки'),
             Menu(Icons.menu, 'Меню'),
             Menu(Icons.shopping_basket_outlined, 'Корзина'),
             Menu(Icons.phone,
-                '89143591106\nтел для заявок пгт.Карымское ул. Верняя 3в'),
+                '89143591106 \nтел для заявок'),
+            Menu(Icons.location_city,
+                'пгт.Карымское ул. Верняя 3в'),
           ]
               .map((menu) => _SliderMenuItem(
                   title: menu.title,

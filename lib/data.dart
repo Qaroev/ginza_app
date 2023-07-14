@@ -213,7 +213,7 @@ const String jsonData = '''[
             "image": "assets/images/dop/Соевый-соус.jpg",
             "description": "",
             "id": "0076",
-            "price": 0
+            "price": 50
  ,
  "count":0         }
         ]
@@ -226,7 +226,7 @@ const String jsonData = '''[
             "image": "assets/images/dop/Халапеньо.jpg",
             "description": "",
             "id": "",
-            "price": 0
+            "price": 50
  ,
  "count":0         }
         ]
@@ -430,15 +430,6 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Гречневая_лапша_с_морепродуктами-",
-            "image": "assets/images/chiness/Гречневая_лапша_с_морепродуктами-.jpg",
-            "description": "Мидии, кальмар и креветки в устричном соусе с гречневой лапшой и овощами",
-            "id": "0014",
-            "price": 360,
-            "count":0
-          },
-        
-          {
             "name": "Мясо-верёвочкой",
             "image": "assets/images/chiness/Мясо-верёвочкой.jpg",
             "description": "Свинина, яйцо (белок), крахмал, болгарский перец, лук, морковь, грибы древесные, соевый соус, виноградный уксус, сахар, крахмал, томатная паста, апельсиновый концентрат, китайские приправы",
@@ -509,7 +500,7 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Салат_из_древесных_грибов",
+            "name": "Салат_из_древесных_грибов  500 гр",
             "image": "assets/images/chiness/Салат_из_древесных_грибов.jpg",
             "description": "Древесные чёрные и белые грибы, огурцы, морковь, сахар, китайские соусы и приправа",
             "id": "0088",
@@ -517,7 +508,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Салат_из_свиных_ушей",
+            "name": "Салат_из_древесных_грибов  250 гр",
+            "image": "assets/images/chiness/Салат_из_древесных_грибов.jpg",
+            "description": "Древесные чёрные и белые грибы, огурцы, морковь, сахар, китайские соусы и приправа",
+            "id": "0088",
+            "price": 470,
+            "count":0
+          },
+          {
+            "name": "Салат_из_свиных_ушей 500 гр",
             "image": "assets/images/chiness/Салат_из_свиных_ушей.jpg",
             "description": "Свиные уши, огурец, морковь, сахар, китайские соусы и приправа",
             "id": "0090",
@@ -525,7 +524,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Салат_из_языка",
+            "name": "Салат_из_свиных_ушей 250 гр",
+            "image": "assets/images/chiness/Салат_из_свиных_ушей.jpg",
+            "description": "Свиные уши, огурец, морковь, сахар, китайские соусы и приправа",
+            "id": "0090",
+            "price": 295,
+            "count":0
+          },
+          {
+            "name": "Салат_из_языка 500 гр",
             "image": "assets/images/chiness/Салат_из_языка.jpg",
             "description": "Говяжий язык, огурцы, морковь, помидоры, майонез, китайская приправа",
             "id": "0092",
@@ -533,11 +540,27 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Салат_свинина_с_арахисом",
+            "name": "Салат_из_языка 250 гр",
+            "image": "assets/images/chiness/Салат_из_языка.jpg",
+            "description": "Говяжий язык, огурцы, морковь, помидоры, майонез, китайская приправа",
+            "id": "0092",
+            "price": 299,
+            "count":0
+          },
+          {
+            "name": "Салат_свинина_с_арахисом 500 гр",
             "image": "assets/images/chiness/Салат_свинина_с_арахисом.jpg",
             "description": "Отварная свинина, огурцы, помидоры, древесные грибы, лук, арахис, сахар, китайские соусы и приправа",
             "id": "0094",
             "price": 490,
+            "count":0
+          },
+          {
+            "name": "Салат_свинина_с_арахисом 250 гр",
+            "image": "assets/images/chiness/Салат_свинина_с_арахисом.jpg",
+            "description": "Отварная свинина, огурцы, помидоры, древесные грибы, лук, арахис, сахар, китайские соусы и приправа",
+            "id": "0094",
+            "price": 255,
             "count":0
           }
         ]
@@ -608,7 +631,7 @@ const String jsonData = '''[
         "name": "Пицца",
         "products": [
           {
-            "name": "4_сыра",
+            "name": "4_сыра 40 см",
             "image": "assets/images/pizza/4_сыра.jpg",
             "description": "Тесто, соус фирменный, сыр моцарелла, сыр гауда, сыр пармезан, сыр рассольный, грецкие орехи",
             "id": "0044",
@@ -616,7 +639,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Барбекю",
+            "name": "4_сыра 30 см",
+            "image": "assets/images/pizza/4_сыра.jpg",
+            "description": "Тесто, соус фирменный, сыр моцарелла, сыр гауда, сыр пармезан, сыр рассольный, грецкие орехи",
+            "id": "0044",
+            "price": 510,
+            "count":0
+          },
+          {
+            "name": "Барбекю 40 см",
             "image": "assets/images/pizza/Барбекю.jpg",
             "description": "Тесто, соус томатный, шампиньоны, бекон, лук, сыр моцарелла, соус Барбекю, укроп",
             "id": "0046",
@@ -624,7 +655,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Гавайская",
+            "name": "Барбекю 30 см",
+            "image": "assets/images/pizza/Барбекю.jpg",
+            "description": "Тесто, соус томатный, шампиньоны, бекон, лук, сыр моцарелла, соус Барбекю, укроп",
+            "id": "0046",
+            "price": 510,
+            "count":0
+          },
+          {
+            "name": "Гавайская 40 см",
             "image": "assets/images/pizza/Гавайская.jpg",
             "description": "Тесто, соус фирменный, курица, сыр моцарелла, ананас консервированный",
             "id": "0048",
@@ -632,7 +671,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Классическая",
+            "name": "Гавайская 30 см",
+            "image": "assets/images/pizza/Гавайская.jpg",
+            "description": "Тесто, соус фирменный, курица, сыр моцарелла, ананас консервированный",
+            "id": "0048",
+            "price": 540,
+            "count":0
+          },
+          {
+            "name": "Классическая 40 см",
             "image": "assets/images/pizza/Классическая.jpg",
             "description": "Тесто, соус фирменный, ветчина, сыр моцарелла, помидоры, укроп",
             "id": "0050",
@@ -640,7 +687,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Куриная_с_грибами",
+            "name": "Классическая 30 см",
+            "image": "assets/images/pizza/Классическая.jpg",
+            "description": "Тесто, соус фирменный, ветчина, сыр моцарелла, помидоры, укроп",
+            "id": "0050",
+            "price": 500,
+            "count":0
+          },
+          {
+            "name": "Куриная_с_грибами 40 см",
             "image": "assets/images/pizza/Куриная_с_грибами.jpg",
             "description": "Тесто, соус фирменный, курица, шампиньоны, сыр моцарелла, помидоры, укроп",
             "id": "0052",
@@ -648,7 +703,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Курочка_с_чесноком",
+            "name": "Куриная_с_грибами 30 см",
+            "image": "assets/images/pizza/Куриная_с_грибами.jpg",
+            "description": "Тесто, соус фирменный, курица, шампиньоны, сыр моцарелла, помидоры, укроп",
+            "id": "0052",
+            "price": 520,
+            "count":0
+          },
+          {
+            "name": "Курочка_с_чесноком 40 см",
             "image": "assets/images/pizza/Курочка_с_чесноком.jpg",
             "description": "Тесто, соус чесночный, курица, сыр моцарелла, помидоры, укроп",
             "id": "0054",
@@ -656,7 +719,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Маргарита",
+            "name": "Курочка_с_чесноком 30 см",
+            "image": "assets/images/pizza/Курочка_с_чесноком.jpg",
+            "description": "Тесто, соус чесночный, курица, сыр моцарелла, помидоры, укроп",
+            "id": "0054",
+            "price": 510,
+            "count":0
+          },
+          {
+            "name": "Маргарита 40 см",
             "image": "assets/images/pizza/Маргарита.jpg",
             "description": "Тесто, соус томатный, сыр моцарелла, помидоры, укроп",
             "id": "0056",
@@ -664,7 +735,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Морская",
+            "name": "Маргарита 30 см",
+            "image": "assets/images/pizza/Маргарита.jpg",
+            "description": "Тесто, соус томатный, сыр моцарелла, помидоры, укроп",
+            "id": "0056",
+            "price": 410,
+            "count":0
+          },
+          {
+            "name": "Морская 40 см",
             "image": "assets/images/pizza/Морская.jpg",
             "description": "Тесто, соус фирменный, кольца кальмара, мясо мидий, креветки, полоски кальмара, щупальца кальмара, сыр моцарелла, маслины, укроп",
             "id": "0058",
@@ -672,7 +751,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Мясная",
+            "name": "Морская 30 см",
+            "image": "assets/images/pizza/Морская.jpg",
+            "description": "Тесто, соус фирменный, кольца кальмара, мясо мидий, креветки, полоски кальмара, щупальца кальмара, сыр моцарелла, маслины, укроп",
+            "id": "0058",
+            "price": 520,
+            "count":0
+          },
+          {
+            "name": "Мясная 40 см",
             "image": "assets/images/pizza/Мясная.jpg",
             "description": "Тесто, соус томатный, фарш свинина/говядина, лук репчатый, перец болгарский, помидоры, сыр моцарелла, шампиньоны, укроп",
             "id": "0060",
@@ -680,7 +767,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Острая_курочка",
+            "name": "Мясная 30 см",
+            "image": "assets/images/pizza/Мясная.jpg",
+            "description": "Тесто, соус томатный, фарш свинина/говядина, лук репчатый, перец болгарский, помидоры, сыр моцарелла, шампиньоны, укроп",
+            "id": "0060",
+            "price": 670,
+            "count":0
+          },
+          {
+            "name": "Острая_курочка 40 см",
             "image": "assets/images/pizza/Острая_курочка.jpg",
             "description": "Тесто, соус спайси, репчатый лук, курица, перец халапеньо, сыр моцарелла, помидоры черри, укроп",
             "id": "0062",
@@ -688,7 +783,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Охотничья",
+            "name": "Острая_курочка 30 см",
+            "image": "assets/images/pizza/Острая_курочка.jpg",
+            "description": "Тесто, соус спайси, репчатый лук, курица, перец халапеньо, сыр моцарелла, помидоры черри, укроп",
+            "id": "0062",
+            "price": 520,
+            "count":0
+          },
+          {
+            "name": "Охотничья 40 см",
             "image": "assets/images/pizza/Охотничья.jpg",
             "description": "Тесто, соус спайси, репчатый лук, охотничьи колбаски, маслины, сыр моцарелла, укроп",
             "id": "0064",
@@ -696,7 +799,15 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Пепперони",
+            "name": "Охотничья 30 см",
+            "image": "assets/images/pizza/Охотничья.jpg",
+            "description": "Тесто, соус спайси, репчатый лук, охотничьи колбаски, маслины, сыр моцарелла, укроп",
+            "id": "0064",
+            "price": 530,
+            "count":0
+          },
+          {
+            "name": "Пепперони 40 см",
             "image": "assets/images/pizza/Пепперони.jpg",
             "description": "Тесто, соус томатный, колбаса пепперони, перец болгарский, сыр моцарелла, укроп",
             "id": "0066",
@@ -704,11 +815,27 @@ const String jsonData = '''[
             "count":0
           },
           {
-            "name": "Римская",
+            "name": "Пепперони 30 см",
+            "image": "assets/images/pizza/Пепперони.jpg",
+            "description": "Тесто, соус томатный, колбаса пепперони, перец болгарский, сыр моцарелла, укроп",
+            "id": "0066",
+            "price": 530,
+            "count":0
+          },
+          {
+            "name": "Римская 40 см",
             "image": "assets/images/pizza/Римская.jpg",
             "description": "Тесто, соус томатный, колбаса п/к, сыр моцарелла, солёные огурцы, укроп",
             "id": "0068",
             "price": 640,
+            "count":0
+          },
+          {
+            "name": "Римская 30 см",
+            "image": "assets/images/pizza/Римская.jpg",
+            "description": "Тесто, соус томатный, колбаса п/к, сыр моцарелла, солёные огурцы, укроп",
+            "id": "0068",
+            "price": 510,
             "count":0
           }
         ]
@@ -725,56 +852,56 @@ const String jsonData = '''[
             "name": "Акинава",
             "image": "assets/images/roll/Акинава.jpg",
             "description": "",
-            "id": "0114",
-            "price": 210,
+            "id": "0098",
+            "price": 350,
             "count":0
           },
           {
             "name": "Камчатский",
             "image": "assets/images/roll/Камчатский.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0110",
+            "price": 320,
             "count":0
           },
           {
             "name": "Ролл_Восток",
             "image": "assets/images/roll/Ролл_Восток.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0099",
+            "price": 390,
             "count":0
           },
           {
             "name": "Сальмон_фурай-transformed",
             "image": "assets/images/roll/Сальмон_фурай-transformed.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0111",
+            "price": 390,
             "count":0
           },
           {
             "name": "Сяке_темпура",
             "image": "assets/images/roll/Сяке_темпура.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0100",
+            "price": 380,
             "count":0
           },
           {
             "name": "Хотатэ_фурай_(гребешок)",
             "image": "assets/images/roll/Хотатэ_фурай_(гребешок).jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0113",
+            "price": 370,
             "count":0
           },
           {
             "name": "Цезарь_с_курицей",
             "image": "assets/images/roll/Цезарь_с_курицей.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0145",
+            "price": 330,
             "count":0
           }
         ]
@@ -786,48 +913,48 @@ const String jsonData = '''[
             "name": "Запеченный_с_гребешком",
             "image": "assets/images/roll/Запеченный_с_гребешком.jpg",
             "description": "",
-            "id": "0114",
-            "price": 210,
+            "id": "0106",
+            "price": 350,
             "count":0
           },
           {
             "name": "Запеченный_с_крабом",
             "image": "assets/images/roll/Запеченный_с_крабом.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0104",
+            "price": 340,
             "count":0
           },
           {
             "name": "Запеченный_с_креветкой",
             "image": "assets/images/roll/Запеченный_с_креветкой.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0107",
+            "price": 370,
             "count":0
           },
           {
             "name": "Запеченный_с_семгой",
             "image": "assets/images/roll/Запеченный_с_семгой.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0108",
+            "price": 390,
             "count":0
           },
           {
             "name": "Кани_темпура",
             "image": "assets/images/roll/Кани_темпура.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0103",
+            "price": 350,
             "count":0
           },
           {
             "name": "Хот_тори",
             "image": "assets/images/roll/Хот_тори.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0105",
+            "price": 330,
             "count":0
           }
         ]
@@ -839,48 +966,48 @@ const String jsonData = '''[
             "name": "Гурман",
             "image": "assets/images/roll/Гурман.jpg",
             "description": "",
-            "id": "0114",
-            "price": 210,
+            "id": "0152",
+            "price": 1300,
             "count":0
           },
           {
             "name": "Калифорния",
             "image": "assets/images/roll/Калифорния.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0128",
+            "price": 280,
             "count":0
           },
           {
             "name": "Лава",
             "image": "assets/images/roll/Лава.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0155",
+            "price": 1360,
             "count":0
           },
           {
             "name": "Микс",
             "image": "assets/images/roll/Микс.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0151",
+            "price": 1200,
             "count":0
           },
           {
             "name": "Мини-сет",
             "image": "assets/images/roll/Мини-сет.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0150",
+            "price": 780,
             "count":0
           },
           {
             "name": "Сет_калифорния",
             "image": "assets/images/roll/Сет_калифорния.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0154",
+            "price": 1400,
             "count":0
           },
           {
@@ -888,23 +1015,23 @@ const String jsonData = '''[
             "image": "assets/images/roll/Сет_Лава.jpg",
             "description": "",
             "id": "0115",
-            "price": 190,
+            "price": 1360,
             "count":0
           },
           {
             "name": "Темпурный",
             "image": "assets/images/roll/Темпурный.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0158",
+            "price": 1390,
             "count":0
           },
           {
             "name": "Трио",
             "image": "assets/images/roll/Трио.jpg",
             "description": "",
-            "id": "0115",
-            "price": 190,
+            "id": "0159",
+            "price": 950,
             "count":0
           }
         ]

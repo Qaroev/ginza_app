@@ -10,22 +10,22 @@ class RegionsPage extends StatefulWidget {
 class _RegionsPageState extends State<RegionsPage> {
   var regions = [
     {
-      "name": "ПО КАРЫМСКОЙ 100 р",
+      "name": "по Карымской 100 р",
       "startTime": "11:00",
       "endTime": "22:30",
     },
     {
-      "name": "ДО КАРЬЕРА 200р",
+      "name": "до Карьера 200р",
       "startTime": "11:00",
       "endTime": "22:30",
     },
     {
-      "name": "ДО ИНГОДЫ 250р",
+      "name": "до Ингоды 250р",
       "startTime": "11:00",
       "endTime": "22:30",
     },
     {
-      "name": "ДО КАДАХТЫ 250р",
+      "name": "до Кадахты 250р",
       "startTime": "11:00",
       "endTime": "22:30",
     }
@@ -86,7 +86,7 @@ class _RegionsPageState extends State<RegionsPage> {
                   color: Colors.grey,
                 ),
                 title: Text(
-                  '${e['name']}',
+                  'Доставка ${e['name']}',
                   style: TextStyle(color: Colors.white),
                 ),
                 subtitle: Row(
