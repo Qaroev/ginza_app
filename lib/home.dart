@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'discount.dart';
 
 var orders = [];
 String nameRegion = 'по Карымской 100 р';
+StreamController<dynamic> refreshStream = StreamController<dynamic>.broadcast();
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -29,6 +31,13 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     menuItems = (jsonDecode(jsonData) as List);
+    refreshStream.stream.listen((event) {
+      if (event != null) {
+        setState(() {
+          orders = event['orders'];
+        });
+      }
+    });
   }
 
   @override
@@ -103,7 +112,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             child: Container(
-              color: Colors.black,
               child: Column(
                 children: [
                   Container(
@@ -185,15 +193,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   Expanded(
                     child: ListView(
                       children: [
-                        burgers(),
-                        desert(),
-                        dop(),
-                        sakuski(),
-                        chiness(),
-                        napitki(),
-                        pizza(),
                         roll(),
+                        burgers(),
+                        pizza(),
+                        chiness(),
+                        sakuski(),
+                        dop(),
+                        // napitki(),
+                        desert(),
                         salat(),
+                        Container(color: const Color(0xFF1A1A1D), height: 100)
                       ],
                     ),
                   ),
@@ -265,136 +274,111 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
         ),
         children: [
-          ...menuItems[0]['products']!.map((e) {
+          ...menuItems[0]['products']!.map((it) {
             return Container(
-              width: MediaQuery.of(context).size.width,
-              color: const Color(0xFF1A1A1D),
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(e['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
+              decoration: BoxDecoration(
+                  color: Color(0xFF1A1A1D),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ...e['products'].map((it) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFF1A1A1D),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(child: Image.asset('${it['image']}')),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['name'],
-                                style: const TextStyle(
+                  Center(child: Image.asset('${it['image']}')),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: Text(it['name'],
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        )),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: Text(it['description'],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        )),
+                  ),
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 18.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('${it['price']} р.',
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFFDF5145),
+                            )),
+                        if (it['count'] == 0)
+                          TextButton(
+                            onPressed: () {
+                              it['count'] = 1;
+                              orders.add(it);
+                              setState(() {});
+                            },
+                            child: const Text('В КОРЗИНУ',
+                                style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
                                   color: Colors.white,
                                 )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('${it['price']} р.',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFDF5145),
-                                    )),
-                                if (it['count'] == 0)
-                                  TextButton(
-                                    onPressed: () {
-                                      it['count'] = 1;
-                                      orders.add(it);
-                                      setState(() {});
-                                    },
-                                    child: const Text('В КОРЗИНУ',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        )),
-                                  )
-                                else
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.remove),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] -= 1;
-                                            if (it['count'] == 0) {
-                                              orders.removeWhere(
-                                                  (item) => item == it);
-                                            }
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        ' ${it['count']}',
-                                        style: const TextStyle(
-                                            color: Color(0xFFDF5145),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundColor: Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] += 1;
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 10,
                           )
-                        ],
-                      ),
-                    );
-                  })
+                        else
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              CircleAvatar(
+                                backgroundColor: const Color(0xFFDF5145),
+                                radius: 20,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(Icons.remove),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    it['count'] -= 1;
+                                    if (it['count'] == 0) {
+                                      orders.removeWhere((item) => item == it);
+                                    }
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Text(
+                                ' ${it['count']}',
+                                style: const TextStyle(
+                                    color: Color(0xFFDF5145),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(width: 10),
+                              CircleAvatar(
+                                backgroundColor: Color(0xFFDF5145),
+                                radius: 20,
+                                child: IconButton(
+                                  padding: EdgeInsets.zero,
+                                  icon: Icon(Icons.add),
+                                  color: Colors.white,
+                                  onPressed: () {
+                                    it['count'] += 1;
+                                    setState(() {});
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             );
@@ -422,134 +406,115 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
         ),
         children: [
-          ...menuItems[1]['products']!.map((e) {
+          ...menuItems[1]['products']!.map((it) {
             return Container(
               width: MediaQuery.of(context).size.width,
               color: const Color(0xFF1A1A1D),
               padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(e['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-                children: [
-                  ...e['products'].map((it) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFF1A1A1D),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(0xFF1A1A1D),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(child: Image.asset('${it['image']}')),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['name'],
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['description'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Center(child: Image.asset('${it['image']}')),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['name'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Row(
+                          Text('${it['price']} р.',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFDF5145),
+                              )),
+                          if (it['count'] == 0)
+                            TextButton(
+                              onPressed: () {
+                                it['count'] = 1;
+                                orders.add(it);
+                                setState(() {});
+                              },
+                              child: const Text('В КОРЗИНУ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  )),
+                            )
+                          else
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('${it['price']} р.',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFDF5145),
-                                    )),
-                                if (it['count'] == 0)
-                                  TextButton(
+                                CircleAvatar(
+                                  backgroundColor: const Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.remove),
+                                    color: Colors.white,
                                     onPressed: () {
-                                      it['count'] = 1;
-                                      orders.add(it);
+                                      it['count'] -= 1;
+                                      if (it['count'] == 0) {
+                                        orders
+                                            .removeWhere((item) => item == it);
+                                      }
                                       setState(() {});
                                     },
-                                    child: const Text('В КОРЗИНУ',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        )),
-                                  )
-                                else
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.remove),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] -= 1;
-                                            if (it['count'] == 0) {
-                                              orders.removeWhere(
-                                                  (item) => item == it);
-                                            }
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        ' ${it['count']}',
-                                        style: const TextStyle(
-                                            color: Color(0xFFDF5145),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundColor: Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] += 1;
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                    ],
                                   ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  ' ${it['count']}',
+                                  style: const TextStyle(
+                                      color: Color(0xFFDF5145),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(width: 10),
+                                CircleAvatar(
+                                  backgroundColor: Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.add),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      it['count'] += 1;
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
                         ],
                       ),
-                    );
-                  })
-                ],
+                    ),
+                  ],
+                ),
               ),
             );
           })
@@ -730,134 +695,115 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
         ),
         children: [
-          ...menuItems[3]['products']!.map((e) {
+          ...menuItems[3]['products']!.map((it) {
             return Container(
               width: MediaQuery.of(context).size.width,
               color: const Color(0xFF1A1A1D),
               padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(e['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-                children: [
-                  ...e['products'].map((it) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFF1A1A1D),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(0xFF1A1A1D),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(child: Image.asset('${it['image']}')),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['name'],
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['description'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Center(child: Image.asset('${it['image']}')),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['name'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Row(
+                          Text('${it['price']} р.',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFDF5145),
+                              )),
+                          if (it['count'] == 0)
+                            TextButton(
+                              onPressed: () {
+                                it['count'] = 1;
+                                orders.add(it);
+                                setState(() {});
+                              },
+                              child: const Text('В КОРЗИНУ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  )),
+                            )
+                          else
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('${it['price']} р.',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFDF5145),
-                                    )),
-                                if (it['count'] == 0)
-                                  TextButton(
+                                CircleAvatar(
+                                  backgroundColor: const Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.remove),
+                                    color: Colors.white,
                                     onPressed: () {
-                                      it['count'] = 1;
-                                      orders.add(it);
+                                      it['count'] -= 1;
+                                      if (it['count'] == 0) {
+                                        orders
+                                            .removeWhere((item) => item == it);
+                                      }
                                       setState(() {});
                                     },
-                                    child: const Text('В КОРЗИНУ',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        )),
-                                  )
-                                else
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.remove),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] -= 1;
-                                            if (it['count'] == 0) {
-                                              orders.removeWhere(
-                                                  (item) => item == it);
-                                            }
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        ' ${it['count']}',
-                                        style: const TextStyle(
-                                            color: Color(0xFFDF5145),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundColor: Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] += 1;
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                    ],
                                   ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  ' ${it['count']}',
+                                  style: const TextStyle(
+                                      color: Color(0xFFDF5145),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(width: 10),
+                                CircleAvatar(
+                                  backgroundColor: Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.add),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      it['count'] += 1;
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
                         ],
                       ),
-                    );
-                  })
-                ],
+                    ),
+                  ],
+                ),
               ),
             );
           })
@@ -1038,134 +984,115 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
         ),
         children: [
-          ...menuItems[5]['products']!.map((e) {
+          ...menuItems[5]['products']!.map((it) {
             return Container(
               width: MediaQuery.of(context).size.width,
               color: const Color(0xFF1A1A1D),
               padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(e['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-                children: [
-                  ...e['products'].map((it) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFF1A1A1D),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(0xFF1A1A1D),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(child: Image.asset('${it['image']}')),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['name'],
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['description'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Center(child: Image.asset('${it['image']}')),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['name'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Row(
+                          Text('${it['price']} р.',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFDF5145),
+                              )),
+                          if (it['count'] == 0)
+                            TextButton(
+                              onPressed: () {
+                                it['count'] = 1;
+                                orders.add(it);
+                                setState(() {});
+                              },
+                              child: const Text('В КОРЗИНУ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  )),
+                            )
+                          else
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('${it['price']} р.',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFDF5145),
-                                    )),
-                                if (it['count'] == 0)
-                                  TextButton(
+                                CircleAvatar(
+                                  backgroundColor: const Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.remove),
+                                    color: Colors.white,
                                     onPressed: () {
-                                      it['count'] = 1;
-                                      orders.add(it);
+                                      it['count'] -= 1;
+                                      if (it['count'] == 0) {
+                                        orders
+                                            .removeWhere((item) => item == it);
+                                      }
                                       setState(() {});
                                     },
-                                    child: const Text('В КОРЗИНУ',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        )),
-                                  )
-                                else
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.remove),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] -= 1;
-                                            if (it['count'] == 0) {
-                                              orders.removeWhere(
-                                                  (item) => item == it);
-                                            }
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        ' ${it['count']}',
-                                        style: const TextStyle(
-                                            color: Color(0xFFDF5145),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundColor: Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] += 1;
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                    ],
                                   ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  ' ${it['count']}',
+                                  style: const TextStyle(
+                                      color: Color(0xFFDF5145),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(width: 10),
+                                CircleAvatar(
+                                  backgroundColor: Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.add),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      it['count'] += 1;
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
                         ],
                       ),
-                    );
-                  })
-                ],
+                    ),
+                  ],
+                ),
               ),
             );
           })
@@ -1192,134 +1119,115 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
         ),
         children: [
-          ...menuItems[6]['products']!.map((e) {
+          ...menuItems[6]['products']!.map((it) {
             return Container(
               width: MediaQuery.of(context).size.width,
               color: const Color(0xFF1A1A1D),
               padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(e['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-                children: [
-                  ...e['products'].map((it) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFF1A1A1D),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+              child: Container(
+                decoration: BoxDecoration(
+                    color: Color(0xFF1A1A1D),
+                    borderRadius: BorderRadius.circular(10)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(child: Image.asset('${it['image']}')),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['name'],
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Text(it['description'],
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          )),
+                    ),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Center(child: Image.asset('${it['image']}')),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['name'],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Row(
+                          Text('${it['price']} р.',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: Color(0xFFDF5145),
+                              )),
+                          if (it['count'] == 0)
+                            TextButton(
+                              onPressed: () {
+                                it['count'] = 1;
+                                orders.add(it);
+                                setState(() {});
+                              },
+                              child: const Text('В КОРЗИНУ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  )),
+                            )
+                          else
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('${it['price']} р.',
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w700,
-                                      color: Color(0xFFDF5145),
-                                    )),
-                                if (it['count'] == 0)
-                                  TextButton(
+                                CircleAvatar(
+                                  backgroundColor: const Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.remove),
+                                    color: Colors.white,
                                     onPressed: () {
-                                      it['count'] = 1;
-                                      orders.add(it);
+                                      it['count'] -= 1;
+                                      if (it['count'] == 0) {
+                                        orders
+                                            .removeWhere((item) => item == it);
+                                      }
                                       setState(() {});
                                     },
-                                    child: const Text('В КОРЗИНУ',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        )),
-                                  )
-                                else
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.remove),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] -= 1;
-                                            if (it['count'] == 0) {
-                                              orders.removeWhere(
-                                                  (item) => item == it);
-                                            }
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        ' ${it['count']}',
-                                        style: const TextStyle(
-                                            color: Color(0xFFDF5145),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundColor: Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] += 1;
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                    ],
                                   ),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  ' ${it['count']}',
+                                  style: const TextStyle(
+                                      color: Color(0xFFDF5145),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(width: 10),
+                                CircleAvatar(
+                                  backgroundColor: Color(0xFFDF5145),
+                                  radius: 20,
+                                  child: IconButton(
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(Icons.add),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      it['count'] += 1;
+                                      setState(() {});
+                                    },
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
                         ],
                       ),
-                    );
-                  })
-                ],
+                    ),
+                  ],
+                ),
               ),
             );
           })
@@ -1500,136 +1408,117 @@ class _MyHomePageState extends State<MyHomePage> {
           color: Colors.white,
         ),
         children: [
-          ...menuItems[8]['products']!.map((e) {
+          ...menuItems[8]['products']!.map((it) {
             return Container(
-              width: MediaQuery.of(context).size.width,
-              color: const Color(0xFF1A1A1D),
-              padding: const EdgeInsets.only(left: 15, right: 15),
-              child: ExpansionTile(
-                tilePadding: EdgeInsets.zero,
-                title: Text(e['name'],
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.white,
-                    )),
-                trailing: const Icon(
-                  Icons.arrow_forward_ios_rounded,
-                  color: Colors.white,
-                ),
-                children: [
-                  ...e['products'].map((it) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xFF1A1A1D),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Center(child: Image.asset('${it['image']}')),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['name'],
+                width: MediaQuery.of(context).size.width,
+                color: const Color(0xFF1A1A1D),
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Color(0xFF1A1A1D),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(child: Image.asset('${it['image']}')),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: Text(it['name'],
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            )),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: Text(it['description'],
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            )),
+                      ),
+                      const SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('${it['price']} р.',
                                 style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.w700,
-                                  color: Colors.white,
+                                  color: Color(0xFFDF5145),
                                 )),
-                          ),
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Text(it['description'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          const SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 18.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('${it['price']} р.',
-                                    style: const TextStyle(
+                            if (it['count'] == 0)
+                              TextButton(
+                                onPressed: () {
+                                  it['count'] = 1;
+                                  orders.add(it);
+                                  setState(() {});
+                                },
+                                child: const Text('В КОРЗИНУ',
+                                    style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w700,
-                                      color: Color(0xFFDF5145),
+                                      color: Colors.white,
                                     )),
-                                if (it['count'] == 0)
-                                  TextButton(
-                                    onPressed: () {
-                                      it['count'] = 1;
-                                      orders.add(it);
-                                      setState(() {});
-                                    },
-                                    child: const Text('В КОРЗИНУ',
-                                        style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        )),
-                                  )
-                                else
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      CircleAvatar(
-                                        backgroundColor:
-                                            const Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.remove),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] -= 1;
-                                            if (it['count'] == 0) {
-                                              orders.removeWhere(
-                                                  (item) => item == it);
-                                            }
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                      SizedBox(width: 10),
-                                      Text(
-                                        ' ${it['count']}',
-                                        style: const TextStyle(
-                                            color: Color(0xFFDF5145),
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      SizedBox(width: 10),
-                                      CircleAvatar(
-                                        backgroundColor: Color(0xFFDF5145),
-                                        radius: 20,
-                                        child: IconButton(
-                                          padding: EdgeInsets.zero,
-                                          icon: Icon(Icons.add),
-                                          color: Colors.white,
-                                          onPressed: () {
-                                            it['count'] += 1;
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ),
-                                    ],
+                              )
+                            else
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  CircleAvatar(
+                                    backgroundColor: const Color(0xFFDF5145),
+                                    radius: 20,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(Icons.remove),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        it['count'] -= 1;
+                                        if (it['count'] == 0) {
+                                          orders.removeWhere(
+                                              (item) => item == it);
+                                        }
+                                        setState(() {});
+                                      },
+                                    ),
                                   ),
-                              ],
-                            ),
-                          ),
-                        ],
+                                  SizedBox(width: 10),
+                                  Text(
+                                    ' ${it['count']}',
+                                    style: const TextStyle(
+                                        color: Color(0xFFDF5145),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(width: 10),
+                                  CircleAvatar(
+                                    backgroundColor: Color(0xFFDF5145),
+                                    radius: 20,
+                                    child: IconButton(
+                                      padding: EdgeInsets.zero,
+                                      icon: Icon(Icons.add),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        it['count'] += 1;
+                                        setState(() {});
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
                       ),
-                    );
-                  })
-                ],
-              ),
-            );
+                    ],
+                  ),
+                ));
           })
         ],
       ),
@@ -1669,7 +1558,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          '90 мин.',
+                          '60 мин.',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -1715,7 +1604,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          '500 р.',
+                          '100 р.',
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -1730,32 +1619,32 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
-                    Column(
-                      children: const [
-                        Icon(
-                          Icons.noise_aware,
-                          color: Colors.white,
-                        ),
-                        SizedBox(height: 10),
-                        Text(
-                          'от 1200 р.',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
-                        Text(
-                          'бесплат.доставки',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w300,
-                              fontSize: 10),
-                        ),
-                      ],
-                    ),
+                    // Column(
+                    //   children: const [
+                    //     Icon(
+                    //       Icons.noise_aware,
+                    //       color: Colors.white,
+                    //     ),
+                    //     SizedBox(height: 10),
+                    //     Text(
+                    //       'от 1200 р.',
+                    //       style: TextStyle(
+                    //           color: Colors.white,
+                    //           fontWeight: FontWeight.bold,
+                    //           fontSize: 16),
+                    //     ),
+                    //     Text(
+                    //       'бесплат.доставки',
+                    //       style: TextStyle(
+                    //           color: Colors.white,
+                    //           fontWeight: FontWeight.w300,
+                    //           fontSize: 10),
+                    //     ),
+                    //   ],
+                    // ),
                   ],
                 ),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
@@ -1805,10 +1694,9 @@ class _SliderView extends StatelessWidget {
             Menu(Icons.discount_outlined, 'Скидки'),
             Menu(Icons.menu, 'Меню'),
             Menu(Icons.shopping_basket_outlined, 'Корзина'),
-            Menu(Icons.phone,
-                '89143591106 \nтел для заявок'),
-            Menu(Icons.location_city,
-                'пгт.Карымское ул. Верняя 3в'),
+            Menu(Icons.info_outline, 'О нас'),
+            Menu(Icons.phone, '89143591106 \nтел для заявок'),
+            Menu(Icons.location_city, 'пгт.Карымское ул. Верняя 3в'),
           ]
               .map((menu) => _SliderMenuItem(
                   title: menu.title,

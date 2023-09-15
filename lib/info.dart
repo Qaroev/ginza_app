@@ -44,141 +44,140 @@ class _InfoPageState extends State<InfoPage> {
             ],
           ),
         ),
-        body: Stack(
-          alignment: Alignment.bottomCenter,
+        body: Column(
           children: [
-            Column(children: [
-              Expanded(
-                  child: Form(
-                key: _formKey,
-                child: ListView(
-                  padding: const EdgeInsets.all(8.0),
-                  children: <Widget>[
-                    Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: TextFormField(
-                          controller: name,
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+            Expanded(
+                child: Form(
+                  key: _formKey,
+                  child: ListView(
+                    padding: const EdgeInsets.all(8.0),
+                    children: <Widget>[
+                      Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            controller: name,
+                            style: TextStyle(fontSize: 20.0, color: Colors.white),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2.0,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
                               ),
+                              labelText: "Имя",
+                              hintStyle: TextStyle(color: Colors.white),
+                              labelStyle: TextStyle(color: Colors.white),
+                              hintText: "Имя",
                             ),
-                            labelText: "Имя",
-                            hintStyle: TextStyle(color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
-                            hintText: "Имя",
-                          ),
-                        )),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: TextFormField(
-                          controller: phone,
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                          )),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            controller: phone,
+                            style: TextStyle(fontSize: 20.0, color: Colors.white),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2.0,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
                               ),
+                              labelText: "Телефон",
+                              hintStyle: TextStyle(color: Colors.white),
+                              labelStyle: TextStyle(color: Colors.white),
+                              hintText: "Телефон",
                             ),
-                            labelText: "Телефон",
-                            hintStyle: TextStyle(color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
-                            hintText: "Телефон",
-                          ),
-                        )),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: TextFormField(
-                          controller: address,
-                          style: TextStyle(fontSize: 20.0, color: Colors.white),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                          )),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            controller: address,
+                            style: TextStyle(fontSize: 20.0, color: Colors.white),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2.0,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
                               ),
+                              labelText: "Адрес доставка",
+                              hintStyle: TextStyle(color: Colors.white),
+                              labelStyle: TextStyle(color: Colors.white),
+                              hintText: "Адрес доставка",
                             ),
-                            labelText: "Адрес доставка",
-                            hintStyle: TextStyle(color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
-                            hintText: "Имя",
-                          ),
-                        )),
-                    SizedBox(
-                      height: 8.0,
-                    ),
-                    Container(
-                        padding: const EdgeInsets.symmetric(vertical: 8.0),
-                        child: TextFormField(
-                          controller: comment,
-                          style: const TextStyle(fontSize: 20.0, color: Colors.white),
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                          )),
+                      SizedBox(
+                        height: 8.0,
+                      ),
+                      Container(
+                          padding: const EdgeInsets.symmetric(vertical: 8.0),
+                          child: TextFormField(
+                            controller: comment,
+                            style: const TextStyle(fontSize: 20.0, color: Colors.white),
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Colors.white,
-                                width: 2.0,
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Colors.white,
+                                  width: 2.0,
+                                ),
                               ),
+                              labelText: "Комментарий",
+                              hintStyle: TextStyle(color: Colors.white),
+                              labelStyle: TextStyle(color: Colors.white),
+                              hintText: "Комментарий",
                             ),
-                            labelText: "Комментарий",
-                            hintStyle: TextStyle(color: Colors.white),
-                            labelStyle: TextStyle(color: Colors.white),
-                            hintText: "Комментарий",
-                          ),
-                        )),
-                  ],
-                ),
-              ))
-            ]),
+                          )),
+                      SizedBox(height: 100)
+
+                    ],
+                  ),
+                )),
             GestureDetector(
               onTap: () {
                 sendOrder(name.text, phone.text, address.text, comment.text);

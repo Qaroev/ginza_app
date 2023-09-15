@@ -58,10 +58,10 @@ class _AboutUsState extends State<AboutUs> {
 
                   borderRadius: BorderRadius.circular(10)
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Режим работы',
                     style: TextStyle(
                       color: Colors.white,
@@ -72,7 +72,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Понедельник',
                         style: TextStyle(
@@ -82,7 +82,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 23:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Вторник',
                         style: TextStyle(
@@ -105,7 +105,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 23:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -118,7 +118,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Среда',
                         style: TextStyle(
@@ -128,7 +128,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 23:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -141,7 +141,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Четверг',
                         style: TextStyle(
@@ -151,7 +151,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 23:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -164,7 +164,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Пятница',
                         style: TextStyle(
@@ -174,7 +174,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 00:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -187,7 +187,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Суббота',
                         style: TextStyle(
@@ -197,7 +197,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 00:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -210,7 +210,7 @@ class _AboutUsState extends State<AboutUs> {
                   SizedBox(height: 10),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
                         'Воскресенье',
                         style: TextStyle(
@@ -220,7 +220,7 @@ class _AboutUsState extends State<AboutUs> {
                         ),
                       ),
                       Text(
-                        '11:00 - 22:30',
+                        '11:00 - 23:00',
                         style: TextStyle(
                           color: Color(0xFFDF5145),
                           fontWeight: FontWeight.w600,
@@ -233,7 +233,7 @@ class _AboutUsState extends State<AboutUs> {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+            const SizedBox(height: 50),
             Container(
               width: MediaQuery.of(context).size.width,
               padding: const EdgeInsets.all(20),
@@ -242,9 +242,9 @@ class _AboutUsState extends State<AboutUs> {
 
                   borderRadius: BorderRadius.circular(10)
               ),
-              child: Column(
+              child: const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'О КОМПАНИИ',
                     style: TextStyle(

@@ -36,10 +36,19 @@ class _BasketPageState extends State<BasketPage> {
               'Корзина',
               style: TextStyle(color: Colors.white),
             ),
-            const Icon(
-              Icons.delete,
-              color: Color(0xFFDF5145),
-            ),
+            // InkWell(
+            //   onTap: () {
+            //     setState(() {
+            //       widget.items!.clear();
+            //     });
+            //     refreshStream.add({"orders": widget.items});
+            //   },
+            //   child: const Icon(
+            //     Icons.delete,
+            //     color: Color(0xFFDF5145),
+            //   ),
+            // ),
+            Container()
           ],
         ),
       ),
@@ -118,6 +127,8 @@ class _BasketPageState extends State<BasketPage> {
                                               widget.items!.removeWhere(
                                                   (item) => item == e);
                                             }
+                                            refreshStream
+                                                .add({"orders": widget.items});
                                             setState(() {});
                                           },
                                         ),
@@ -142,6 +153,8 @@ class _BasketPageState extends State<BasketPage> {
                                           onPressed: () {
                                             e['count'] += 1;
                                             setState(() {});
+                                            refreshStream
+                                                .add({"orders": widget.items});
                                           },
                                         ),
                                       ),
@@ -156,6 +169,7 @@ class _BasketPageState extends State<BasketPage> {
                       }),
                       SizedBox(height: 20),
                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -178,28 +192,28 @@ class _BasketPageState extends State<BasketPage> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 20),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Доставка:',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                '${calcDos()} р.',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // SizedBox(height: 20),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Text(
+                          //       'Доставка:',
+                          //       style: TextStyle(
+                          //         color: Colors.white,
+                          //         fontSize: 18,
+                          //         fontWeight: FontWeight.w600,
+                          //       ),
+                          //     ),
+                          //     Text(
+                          //       '${calcDos()} р.',
+                          //       style: TextStyle(
+                          //         color: Colors.white,
+                          //         fontSize: 18,
+                          //         fontWeight: FontWeight.w600,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(height: 20),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -213,15 +227,58 @@ class _BasketPageState extends State<BasketPage> {
                                 ),
                               ),
                               Text(
-                                '${calc() + calcDos()} р.',
-                                style: TextStyle(
+                                '${calc()} р.',
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ],
-                          )
+                          ),
+                          // const SizedBox(height: 20),
+                          // const Text(
+                          //   'Доставка',
+                          //   style: TextStyle(
+                          //     color: Colors.white,
+                          //     fontSize: 18,
+                          //     fontWeight: FontWeight.bold,
+                          //   ),
+                          // ),
+                          // SizedBox(height: 20),
+                          // ListTile(
+                          //   title: const Text(
+                          //     'Платно',
+                          //     style: TextStyle(
+                          //       color: Colors.white,
+                          //       fontSize: 18,
+                          //       fontWeight: FontWeight.bold
+                          //     ),
+                          //   ),
+                          //   leading: Radio(
+                          //     value: 0,
+                          //     groupValue: 0,
+                          //     activeColor: Color(0xFF6200EE),
+                          //     onChanged: (v) {},
+                          //   ),
+                          // ),
+                          // ListTile(
+                          //   title: const Text(
+                          //     'Безплатно',
+                          //     style: TextStyle(
+                          //         color: Colors.white,
+                          //         fontSize: 18,
+                          //         fontWeight: FontWeight.bold
+                          //     ),
+                          //   ),
+                          //   leading: Radio(
+                          //     value: false,
+                          //     groupValue: 0,
+                          //     activeColor: Color(0xFF6200EE),
+                          //     hoverColor: Colors.white,
+                          //     onChanged: (v) {},
+                          //   ),
+                          // ),
                         ],
                       ),
                       SizedBox(height: 150),
@@ -265,22 +322,22 @@ class _BasketPageState extends State<BasketPage> {
   calcDos() {
     var regions = [
       {
-        "name": "ПО КАРЫМСКОЙ 100 р",
+        "name": "по Карымское 100 р",
         "startTime": "11:00",
         "endTime": "22:30",
       },
       {
-        "name": "ДО КАРЬЕРА 200р",
+        "name": "до Карьера 200р",
         "startTime": "11:00",
         "endTime": "22:30",
       },
       {
-        "name": "ДО ИНГОДЫ 250р",
+        "name": "до Ингоды 250р",
         "startTime": "11:00",
         "endTime": "22:30",
       },
       {
-        "name": "ДО КАДАХТЫ 250р",
+        "name": "до Кадахты 250р",
         "startTime": "11:00",
         "endTime": "22:30",
       }
